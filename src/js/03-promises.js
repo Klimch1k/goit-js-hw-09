@@ -9,10 +9,10 @@ function handleFormSubmit(e) {
   const {
     elements: { delay, step, amount },
   } = e.currentTarget;
-  let s = 0;
+  let timeDelay = parseInt(delay.value);
   for (let i = 1; i <= amount.value; i++) {
-    s += parseInt(step.value);
-    createPromise(i, s)
+    
+    createPromise(i, timeDelay)
       .then(({ position, delay }) => {
         console.log();
         Notiflix.Notify.success(
@@ -24,6 +24,7 @@ function handleFormSubmit(e) {
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
+    timeDelay += parseInt(step.value);
   }
   e.currentTarget.reset();
 }
